@@ -1,0 +1,19 @@
+{% load static %}
+{% static "images" as baseUrl %}
+<!--common files-->
+{% include 'com.html' %}
+
+<!--navbar-->
+{% if request.session.group_value == 'vendor' %}
+	{% include 'navbar_vendor.html' %}
+{% else %}
+	{% include 'navbar.html' %}
+{% endif %}
+<!--home-->
+
+
+<!--footer-->
+{% include 'footer.html' %}
+
+{% load sweetify %}
+{% sweetify %}

@@ -1,0 +1,69 @@
+{% load static %}
+{% static "images" as baseUrl %}
+{% include 'com.html' %}
+{% include 'navbar.html' %}
+   <style>
+       .shop_radio{
+            transform: scale(1);
+            width:100%;
+            height:100%;
+            position:absolute;
+            z-index: 1;
+            opacity: 0.0;
+
+
+       }
+       .shop_radio:hover
+       {
+            border:0.5px solid red;
+       }
+section::-webkit-scrollbar {
+  width: 1px;
+}
+
+section::-webkit-scrollbar-thumb {
+  background: black;
+  border-radius: 50px;
+  opacity : 0.0;
+}
+
+    </style>
+<section class="p-3 container mt-4" style="height:85%; overflow-y: scroll;">
+<form method="post"  name="form1" action="/menu/restuartants/">{% csrf_token%}
+	<div class="row">
+	{% for shop in shops %}
+		{%if shop.shop_state == "START"%}
+		<div class="col-sm-2 border p-0 m-2 ">
+			<input class="shop_radio p-0"  type='radio'  value='{{shop.pk}}' name='shop_select' id="radio1" />
+			<div class="col-sm-12 m-auto"><img class="p-0" style="width:100%;height:180px;" src="{{shop.shop_image.url}}" alt="Card image cap"></div>
+			<div class="col-sm-12 "><h5 >{{shop.shop_name}}</h5></div>
+			<div class="col-sm-12 "><h6 style="font-size:10px;" >{{shop.shop_description}}</h6></div>
+		</div>
+
+		{%else%}
+		<div class=" col-sm-2 border p-0 m-2">
+			<h3 style="position:absolute;z-index:1; width:100%; height:100px;top:20%;opacity:0.5;" class="p-3 bg-secondary m-auto rounded-0 border text-center text-white font-weight-bold">SHOP<br> CLOSED</h3>
+			<div class="col-sm-12"><img class="p-0" style="width:100%;height:180px;" src="{{shop.shop_image.url}}" alt="Card image cap"></div>
+			<div class="col-sm-12"><h5 >{{shop.shop_name}}</h5></div>
+			<div class="col-sm-12"><h6 style="font-size:10px;" >{{shop.shop_description}}</h6></div>
+
+		</div>
+	</div>
+		{%endif%}
+	{% empty %}
+		<p class="mx-auto text-center">Sorry, no selection to display.</p>
+	</div>
+</form>
+	{% endfor %}
+
+</section>
+
+ <script type='text/javascript'>
+
+ $(document).ready(function() {
+   $('input[name=shop_select]').change(function(){
+        $('form[name=form1]').submit();
+   });
+  });
+
+</script>

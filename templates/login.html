@@ -1,0 +1,59 @@
+{% load static %}
+{% static "images" as baseUrl %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>log in</title>
+    <link rel="stylesheet" href="{% static 'css/register_style.css'%}">
+
+</head>
+
+    <div class="main">
+		<!-- Sing in  Form -->
+        <section class="sign-in">
+            <div class="container">
+                <div class="signin-content">
+                    <div class="signin-image">
+                        
+                        <a href="/users/register_verify/" class="signup-image-link">Create an account</a>
+                    </div>
+
+                    <div class="signin-form">
+                        <h2 class="form-title">Sign in</h2>
+                        <form method="post" action="/users/login/" class="register-form" id="login-form">
+							{% csrf_token %}
+                            <div class="form-group">
+                                <label for="user_name"><img src="https://img.icons8.com/ios-glyphs/20/000000/user--v1.png"></label>
+                                <input type="text" name="username" id="user_name" placeholder="User Name"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="your_pass"><img src="https://img.icons8.com/material/16/000000/password--v3.png"></label>
+                                <input type="password" name="password" id="your_pass" placeholder="Password"/>
+                            </div>
+
+                            <div class="form-group form-button">
+                                <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
+                            </div>
+                        </form>
+<!--                        <div class="social-login">-->
+<!--                            <span class="social-label">Or login with</span>-->
+<!--                            <ul class="socials">-->
+<!--                                <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>-->
+<!--                                <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>-->
+<!--                                <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+   
+    <script src="{% static 'js/register_main.js'%}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+{% load sweetify %}
+{% sweetify %}

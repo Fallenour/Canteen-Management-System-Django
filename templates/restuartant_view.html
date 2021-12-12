@@ -1,0 +1,47 @@
+{% load static %}
+{% static "images" as baseUrl %}
+{% include 'com.html' %}
+{% include 'navbar.html' %}
+<style>
+div::-webkit-scrollbar {
+  width: 1px;
+}
+
+div::-webkit-scrollbar-thumb {
+  background: black;
+  border-radius: 50px;
+  opacity : 0.0;
+}
+
+</style>
+
+<div class="jumbotron mx-auto bg-light p-1 m-0 mb-1" id="navbar" style="z-index:-1;">
+    <div class="row container ">
+        <div class="col-sm-1 col-3 m-auto ">
+            <img src="{{shop.shop_image.url}}"  id="image" alt="img content" style="width:70px;height:70px;">
+        </div>
+        <div class="col-sm-8 col-9 mr-auto" >
+            <h3>{{shop.shop_name}}</h3>
+            <h6 class="font-weight-lighter">{{shop.shop_description}}</h6>
+        </div>
+    </div>
+</div>
+<div class="row  w-100 mx-auto mb-3 " >
+    <div class="col-lg-2 border-right" style="position:relative; height:20vh; overflow-y:scroll;">
+    {% include 'categorylist.html' %}
+    </div>
+    <div class="col-lg-7 w-100"  style="position:relative; height: 100vh; overflow-y:scroll; overflow-x:hidden;  ">
+    {% include 'menu.html' %}
+
+    </div>
+    <div class="col-lg-3 container mx-auto" style="position:relative; height:40vh; overflow-y:scroll; ">
+    {% include 'minicart.html' %}
+    {% if ordertable  %}
+    <form action="/order/checkout/" method="post">{% csrf_token %}
+        <button class="row mt-3 btn btn-primary w-100 mx-auto" type="submit" > CHECKOUT </button>
+    </form>
+    {% endif %}
+    </div>
+
+</div>
+
